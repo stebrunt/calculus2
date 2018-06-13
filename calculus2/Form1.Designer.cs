@@ -29,19 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.saveGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.voltTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dVdtTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accelarationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +64,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.saveGraphToolStripMenuItem});
+            this.saveGraphToolStripMenuItem,
+            this.saveAsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -69,9 +73,48 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.openToolStripMenuItem.Text = "open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveGraphToolStripMenuItem
+            // 
+            this.saveGraphToolStripMenuItem.Name = "saveGraphToolStripMenuItem";
+            this.saveGraphToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.saveGraphToolStripMenuItem.Text = "save graph";
+            this.saveGraphToolStripMenuItem.Click += new System.EventHandler(this.saveGraphToolStripMenuItem_Click);
+            // 
+            // graphsToolStripMenuItem
+            // 
+            this.graphsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.voltTimeToolStripMenuItem,
+            this.dVdtTimeToolStripMenuItem,
+            this.accelarationToolStripMenuItem});
+            this.graphsToolStripMenuItem.Name = "graphsToolStripMenuItem";
+            this.graphsToolStripMenuItem.ShowShortcutKeys = false;
+            this.graphsToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.graphsToolStripMenuItem.Text = "graphs";
+            // 
+            // voltTimeToolStripMenuItem
+            // 
+            this.voltTimeToolStripMenuItem.Name = "voltTimeToolStripMenuItem";
+            this.voltTimeToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.voltTimeToolStripMenuItem.Text = "Altitude + time";
+            this.voltTimeToolStripMenuItem.Click += new System.EventHandler(this.voltTimeToolStripMenuItem_Click);
+            // 
+            // dVdtTimeToolStripMenuItem
+            // 
+            this.dVdtTimeToolStripMenuItem.Name = "dVdtTimeToolStripMenuItem";
+            this.dVdtTimeToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.dVdtTimeToolStripMenuItem.Text = "dA/dt - time";
+            this.dVdtTimeToolStripMenuItem.Click += new System.EventHandler(this.dVdtTimeToolStripMenuItem_Click);
+            // 
+            // accelarationToolStripMenuItem
+            // 
+            this.accelarationToolStripMenuItem.Name = "accelarationToolStripMenuItem";
+            this.accelarationToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.accelarationToolStripMenuItem.Text = "Accelaration";
+            this.accelarationToolStripMenuItem.Click += new System.EventHandler(this.accelarationToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -84,50 +127,27 @@
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(343, 50);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(300, 300);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
-            // graphsToolStripMenuItem
+            // saveAsToolStripMenuItem
             // 
-            this.graphsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.voltTimeToolStripMenuItem,
-            this.dVdtTimeToolStripMenuItem});
-            this.graphsToolStripMenuItem.Name = "graphsToolStripMenuItem";
-            this.graphsToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.graphsToolStripMenuItem.Text = "graphs";
-            // 
-            // voltTimeToolStripMenuItem
-            // 
-            this.voltTimeToolStripMenuItem.Name = "voltTimeToolStripMenuItem";
-            this.voltTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.voltTimeToolStripMenuItem.Text = "volt + time";
-            this.voltTimeToolStripMenuItem.Click += new System.EventHandler(this.voltTimeToolStripMenuItem_Click);
-            // 
-            // dVdtTimeToolStripMenuItem
-            // 
-            this.dVdtTimeToolStripMenuItem.Name = "dVdtTimeToolStripMenuItem";
-            this.dVdtTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.dVdtTimeToolStripMenuItem.Text = "dV/dt - time";
-            this.dVdtTimeToolStripMenuItem.Click += new System.EventHandler(this.dVdtTimeToolStripMenuItem_Click);
-            // 
-            // saveGraphToolStripMenuItem
-            // 
-            this.saveGraphToolStripMenuItem.Name = "saveGraphToolStripMenuItem";
-            this.saveGraphToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveGraphToolStripMenuItem.Text = "save graph";
-            this.saveGraphToolStripMenuItem.Click += new System.EventHandler(this.saveGraphToolStripMenuItem_Click);
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -160,6 +180,9 @@
         private System.Windows.Forms.ToolStripMenuItem voltTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dVdtTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveGraphToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accelarationToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }
 

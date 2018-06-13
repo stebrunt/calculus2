@@ -17,13 +17,15 @@ namespace calculus2
         class row
         {
             public double time;
-            public double voltage;
-            public double current;
-            public double voltageDerivative;
-            public double charge;
+            public double Velocity;
+            public double acceleration;
+            public double VelocityDerivative;
+            public double AltitudeDerivative;
+            public double Altitude;
         }
 
         List<row> table = new List<row>();
+        private string imageFileName;
 
         void tableSort()
         {
@@ -34,12 +36,40 @@ namespace calculus2
         void derivative()
         {
             for (int i = 1; i < table.Count; i++)
+
             {
-                double dV = table[i].voltage - table[i - 1].voltage;
+                double dA = table[i].Altitude - table[i - 1].Altitude;
                 double dt = table[i].time - table[i - 1].time;
-                table[i].voltageDerivative = dV / dt;
+                table[i].AltitudeDerivative = dA / dt;
+                table[i].Velocity = table[i].AltitudeDerivative;
             }
+
+
+            
+
+
+
+
+
+
         }
+
+        void secondderivative()
+        {
+
+            for (int i = 1; i < table.Count; i++)
+            {
+                double dA = table[i].Velocity - table[i - 1].Velocity;
+                double dt = table[i].time - table[i - 1].time;
+                table[i].VelocityDerivative = dA / dt;
+            }
+
+
+
+        }
+
+
+  
 
 
 
@@ -78,8 +108,8 @@ namespace calculus2
                                 table.Add(new row());
                                 string[] l = sr.ReadLine().Split(',');
                                 table.Last().time = double.Parse(l[0]);
-                                table.Last().voltage = double.Parse(l[1]);
-                                table.Last().current = double.Parse(l[2]);
+                                table.Last().Altitude = double.Parse(l[1]);
+                                
                             }
   
                         }
@@ -134,17 +164,20 @@ namespace calculus2
             chart1.Series.Add(series1);
             for (int i = 0; i < table.Count; i++)
             {
-                series1.Points.AddXY(table[i].time, table[i].voltage);
+                series1.Points.AddXY(table[i].time, table[i].Altitude);
             }
 
             chart1.ChartAreas[0].AxisX.Title = "time / s";
-            chart1.ChartAreas[0].AxisY.Title = "voltage / V";
+            chart1.ChartAreas[0].AxisY.Title = "Altitude / V";
             chart1.ChartAreas[0].RecalculateAxesScale();
         }
 
+        
         private void dVdtTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             derivative();
+
+           
 
             chart1.Series.Clear();
             chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
@@ -162,17 +195,74 @@ namespace calculus2
             chart1.Series.Add(series1);
             for (int i = 0; i < table.Count; i++)
             {
-                series1.Points.AddXY(table[i].time, table[i].voltageDerivative);
+                series1.Points.AddXY(table[i].time, table[i].AltitudeDerivative);
             }
 
             chart1.ChartAreas[0].AxisX.Title = "time / s";
-            chart1.ChartAreas[0].AxisY.Title = "voltage / V";
+            chart1.ChartAreas[0].AxisY.Title = "Altitude / V";
             chart1.ChartAreas[0].RecalculateAxesScale();
         }
 
         private void saveGraphToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            chart1.SaveImage(, ChartImageFormat.Png);
+            chart1.SaveImage(imageFileName, ChartImageFormat.Png);
+        }
+
+        private void accelarationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            secondderivative();
+
+            chart1.Series.Clear();
+            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
+            Series series1 = new Series
+            {
+                Name = "Points",
+                Color = Color.Blue,
+                IsVisibleInLegend = false,
+                IsXValueIndexed = true,
+                ChartType = SeriesChartType.Spline,
+                BorderWidth = 2
+
+            };
+
+            chart1.Series.Add(series1);
+            for (int i = 0; i < table.Count; i++)
+            {
+                series1.Points.AddXY(table[i].time, table[i].VelocityDerivative);
+            }
+
+            chart1.ChartAreas[0].AxisX.Title = "time / s";
+            chart1.ChartAreas[0].AxisY.Title = "Velocity / V";
+            chart1.ChartAreas[0].RecalculateAxesScale();
+
+           
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = "";
+            saveFileDialog1.Filter = "CSV Files|*.csv";
+            DialogResult result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
+                    {
+                        sw.WriteLine("Time /s,altitude/ft,acceleration/ms,velocity/v");
+                        foreach (row d in table)
+                        {
+                            sw.WriteLine(d.time + "," + d.Altitude + "," + d.acceleration + "," + d.Velocity + ",");
+
+                        }
+
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show(saveFileDialog1.FileName + "failed to save.");
+                }
+            }
         }
     }
 }
