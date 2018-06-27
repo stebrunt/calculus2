@@ -38,7 +38,7 @@ namespace calculus2
             for (int i = 1; i < table.Count; i++)
 
             {
-                double dA = table[i].Altitude - table[i - 1].Altitude;
+                double dA = table[i].Altitude - table[i - 1].Altitude;// this code lets the computer work out the velocity by using the data that has been given to use.
                 double dt = table[i].time - table[i - 1].time;
                 table[i].AltitudeDerivative = dA / dt;
                 table[i].Velocity = table[i].AltitudeDerivative;
@@ -59,7 +59,7 @@ namespace calculus2
 
             for (int i = 1; i < table.Count; i++)
             {
-                double dA = table[i].Velocity - table[i - 1].Velocity;
+                double dA = table[i].Velocity - table[i - 1].Velocity;// this code lets the computer work out the acelleration by using the data that we have justed worked out and  the data thats just been given to use.
                 double dt = table[i].time - table[i - 1].time;
                 table[i].VelocityDerivative = dA / dt;
             }
@@ -91,7 +91,7 @@ namespace calculus2
 
         {
             openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "CSV Files|*.csv";
+            openFileDialog1.Filter = "CSV Files|*.csv"; // this code lets me exstract data from a file so i can use it to make more data.
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -119,12 +119,12 @@ namespace calculus2
 
                 catch (IOException)
                 {
-                    MessageBox.Show(openFileDialog1.FileName + " Failed to open");
+                    MessageBox.Show(openFileDialog1.FileName + " Failed to open"); // if they is more systems running at the same time this message would appear when trying to open the file
 
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show(openFileDialog1.FileName + " is not in the requiered format");
+                    MessageBox.Show(openFileDialog1.FileName + " is not in the requiered format");// if they is more or less than two colunms in the file you are using this message will appear.
                 }
 
                 catch (IndexOutOfRangeException)
@@ -149,7 +149,7 @@ namespace calculus2
         private void voltTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
-            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
+            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;  // this code is for the type of graph that you will be using and the characterisits of the graph for example the colour and the chartwidth
             Series series1 = new Series
             {
                 Name = "Points",
@@ -167,8 +167,8 @@ namespace calculus2
                 series1.Points.AddXY(table[i].time, table[i].Altitude);
             }
 
-            chart1.ChartAreas[0].AxisX.Title = "time / s";
-            chart1.ChartAreas[0].AxisY.Title = "Altitude / V";
+            chart1.ChartAreas[0].AxisX.Title = "time / s"; // this line of code lets me name the x axis 
+            chart1.ChartAreas[0].AxisY.Title = "Altitude / V"; // this line of code lets me name the y axis.
             chart1.ChartAreas[0].RecalculateAxesScale();
         }
 
@@ -180,7 +180,7 @@ namespace calculus2
            
 
             chart1.Series.Clear();
-            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
+            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;// this code is for the type of graph that you will be using and the characterisits of the graph for example the colour and the chartwidth
             Series series1 = new Series
             {
                 Name = "Points",
@@ -213,7 +213,7 @@ namespace calculus2
             secondderivative();
 
             chart1.Series.Clear();
-            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
+            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;// this code is for the type of graph that you will be using and the characterisits of the graph for example the colour and the chartwidth
             Series series1 = new Series
             {
                 Name = "Points",
@@ -242,7 +242,7 @@ namespace calculus2
         {
             saveFileDialog1.FileName = "";
             saveFileDialog1.Filter = "CSV Files|*.csv";
-            DialogResult result = saveFileDialog1.ShowDialog();
+            DialogResult result = saveFileDialog1.ShowDialog(); // this code allows me to save the data that i have created by using a csv file
             if (result == DialogResult.OK)
             {
                 try
